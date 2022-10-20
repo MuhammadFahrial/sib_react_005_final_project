@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { searchNews } from "../../../features/news/search/searchSlice";
-import { addItems, removeItems } from "../../../features/news/saved/savedSlice";
+import { searchNews } from "../../../features/news/newsSlice";
+import { addItems, removeItems } from "../../../features/news/newsSlice";
 import Card from "../../molekuls/Card/Card";
 
 function SearchPage() {
@@ -39,6 +39,7 @@ function SearchPage() {
             return (
               <div key={index} className="border-1 border-gray-700/30 rounded">
                 <Card
+                  key={index}
                   source={news?.source.name}
                   Image={news?.urlToImage}
                   titleImg={news?.title}

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItems, removeItems } from "../../../features/news/saved/savedSlice";
+import { addItems, removeItems } from "../../../features/news/newsSlice";
 import Card from "../../molekuls/Card/Card";
 
 const SavePage = () => {

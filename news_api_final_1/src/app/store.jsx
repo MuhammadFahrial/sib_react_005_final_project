@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import newsReducer from "../features/news/indonesia/newsSliceIndonesia";
-import savedReducer from "../features/news/saved/savedSlice";
-import searchReducer from "../features/news/search/searchSlice";
+import newsReducer from "../features/news/newsSlice";
+import savedReducer from "../features/news/newsSlice";
+import searchReducer from "../features/news/newsSlice";
 import logger from "redux-logger";
 import React from "react";
 

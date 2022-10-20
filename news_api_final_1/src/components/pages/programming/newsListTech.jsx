@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchNews } from "../../../features/news/programming/newsSliceTech";
+import { ProgrammingNews } from "../../../features/news/newsSlice";
 import Card from "../../molekuls/Card/Card";
+import { addItems, removeItems } from "../../../features/news/newsSlice";
 
 const NewsListTech = () => {
   const dispatch = useDispatch();
@@ -9,7 +10,7 @@ const NewsListTech = () => {
   const savedItems = useSelector((state) => state.saved.savedItems);
 
   useEffect(() => {
-    dispatch(fetchNews());
+    dispatch(ProgrammingNews());
   }, [dispatch]);
 
   // console.log(allNews);
