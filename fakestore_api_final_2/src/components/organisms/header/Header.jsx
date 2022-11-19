@@ -8,18 +8,26 @@ export default function Navbar({ fixed }) {
   let navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("user") || localStorage.removeItem("admin");
     navigate("/");
+  };
+
+  const handleHome = () => {
+    if (localStorage.getItem("admin")) {
+      navigate("/stok");
+    } else {
+      navigate("/");
+    }
   };
 
   return (
     <>
-      <nav className="relative flex flex-wrap items-center justify-between px-2 py-3  bg-slate-700 mb-3">
+      <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-slate-700">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             {/* <a className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"> */}
-            <a
-              href="/"
+            <h1
+              
               className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
             >
               Bukapedia
@@ -37,8 +45,8 @@ export default function Navbar({ fixed }) {
                   d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.75c0 .415.336.75.75.75z"
                 />
               </svg>
-            </a>
-            {/* </a> */}
+            </h1>
+
             <button
               className="text-white cursor-pointer text-xl i-3 leading-none px-3 py-1 border border-solid border-white rounded bg-transparent block lg:hidden outline-none focus:outline-white"
               type="button"
@@ -71,56 +79,98 @@ export default function Navbar({ fixed }) {
           >
             <ul className="flex flex-col lg:flex-row list-none align-middle lg:ml-auto">
               <li className="nav-item">
+                <span className="">
+                  <button
+                    className="px-3 align-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                    onClick={() => handleHome()}
+                  >
+                    Home
+                  </button>
+                </span>
+                {/* </a> */}
+              </li>
+
+              {/* <li className="nav-item">
                 <span className="ml-2">
-                  <a
-                    href="/"
+                  <Link
+                    to="/"
                     className="px-3 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                   >
                     Home
-                  </a>
-                </span>
-                {/* </a> */}
-              </li>
-
-              <li className="nav-item">
-                <span className="ml-2">
-                  <Link
-                    to="/cart"
-                    className="px-3 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                  >
-                    Cart
                   </Link>
                 </span>
-                {/* </a> */}
-              </li>
+                
+              </li> */}
 
-              <li className="nav-item">
-                <span className="ml-2">
-                  {!localStorage.getItem("user") && (
+              {localStorage.getItem("user") && (
+                <li className="nav-item">
+                  <span className="ml-2">
+                    <Link
+                      to="/cart"
+                      className="px-3 align-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                    >
+                      Cart
+                    </Link>
+                  </span>
+                  {/* </a> */}
+                </li>
+              )}
+
+              {localStorage.getItem("admin") && (
+                <li className="nav-item">
+                  <span className="ml-2">
+                    <Link
+                      to="/rekap"
+                      className="px-3 align-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                    >
+                      Rekap Penjualan
+                    </Link>
+                  </span>
+                  {/* </a> */}
+                </li>
+              )}
+
+              {!localStorage.getItem("user") && !localStorage.getItem("admin") && (
+                <li className="nav-item">
+                  <span className="ml-2">
                     <Link
                       to="/login"
-                      className="px-3 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                      className="px-3 align-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                     >
                       LOGIN
                     </Link>
-                  )}
-                </span>
-                {/* </a> */}
-              </li>
+                  </span>
+                  {/* </a> */}
+                </li>
+              )}
 
-              <li className="nav-item">
-                <span className="">
-                  {localStorage.getItem("user") && (
+              {localStorage.getItem("user") && (
+                <li className="nav-item">
+                  <span className="">
                     <button
-                      className="logout-button px-3 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                      className="px-3 align-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       onClick={() => handleLogout()}
                     >
                       Logout
                     </button>
-                  )}
-                </span>
-                {/* </a> */}
-              </li>
+                  </span>
+                  {/* </a> */}
+                </li>
+              )}
+
+              {localStorage.getItem("admin") && (
+                <li className="nav-item">
+                  <span className="">
+                    <button
+                      className="px-3 align-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                      onClick={() => handleLogout()}
+                    >
+                      Logout
+                    </button>
+                  </span>
+                  {/* </a> */}
+                </li>
+              )}
             </ul>
           </div>
         </div>

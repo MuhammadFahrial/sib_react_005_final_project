@@ -10,7 +10,10 @@ import NewsListAbout from "./components/pages/AboutPage";
 import AboutPage from "./components/pages/AboutPage";
 import DetailProduct from "./components/pages/DetailProduct";
 import CartPage from "./components/pages/CartPage";
-import ProtectedRoute from "./components/atoms/ProtectedRoute/ProtectedRoute";
+import ProtectedRouteAdmin from "./components/atoms/ProtectedRoute/ProtectedRouteAdmin";
+import ProtectedRouteUser from "./components/atoms/ProtectedRoute/ProtectedRouteUser";
+import RekapPage from "./components/pages/RekapPage";
+import StokPage from "./components/pages/StokPage";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -23,12 +26,24 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/product/:productId" element={<DetailProduct />} />
+        {/* <Route path="/rekap" element={<RekapPage />} /> */}
+        <Route path="/stok" element={<StokPage />} />
+
+        <Route
+          path="/rekap"
+          element={
+            <ProtectedRouteAdmin>
+              <RekapPage />
+            </ProtectedRouteAdmin>
+          }
+        />
+
         <Route
           path="/cart"
           element={
-            <ProtectedRoute>
+            <ProtectedRouteUser>
               <CartPage />
-            </ProtectedRoute>
+            </ProtectedRouteUser>
           }
         />
       </Routes>

@@ -13,8 +13,8 @@ import { addItems } from "../../features/fakestore/fakeStoreSlice";
 const HomePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // let location = useLocation();
   const allProducts = useSelector((state) => state.products.entities);
+  // let location = useLocation();
   // const cartItems = useSelector((state) => state.cart.cartItems);
 
   useEffect(() => {
@@ -26,8 +26,9 @@ const HomePage = () => {
     if (!localStorage.getItem("user")) {
       navigate(`/login`, { replace: location });
     } else {
-    dispatch(addItems(item));
-    // dispatch(addToCart(product));
+      dispatch(addItems(item));
+      alert("Berhasil Disimpan");
+      // dispatch(addToCart(product));
     }
   };
 

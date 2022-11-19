@@ -9,7 +9,6 @@ import logger from "redux-logger";
 export const store = configureStore({
   reducer: {
     products: productReducer,
-    // counter: counterReducer,
     productDetail: detailReducer,
     cart: cartReducer,
     auth: authReducer,
