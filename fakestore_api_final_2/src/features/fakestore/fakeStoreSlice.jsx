@@ -8,6 +8,7 @@ const initialState = {
   entities: [],
   detail: [],
   cartItems: JSON.parse(localStorage.getItem("cart")) || [],
+  // stock: 20,
   // quantity: JSON.parse(localStorage.getItem("quantity")) || [],
 };
 
@@ -16,8 +17,7 @@ export const Products = createAsyncThunk("products/fetchProducts", async () => {
   return res.data;
 });
 
-export const updateStock = createAsyncThunk(
-  );
+export const updateStock = createAsyncThunk();
 
 export const productDetail = createAsyncThunk(
   "products/fetchProducts",
@@ -74,6 +74,10 @@ const productSlice = createSlice({
           "quantity",
           JSON.stringify((state.cartItems[itemIndex].cartQuantity += 1))
         );
+        // localStorage.setItem(
+        //   "stock",
+        //   JSON.stringify(state.cartItems[itemIndex].cartQuantity - stock)
+        // );
         // state.cartItems[itemIndex].cartQuantity += 1;
       } else {
         // state.cartItems.unshift(action.payload);

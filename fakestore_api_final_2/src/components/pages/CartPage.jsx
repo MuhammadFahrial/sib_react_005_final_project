@@ -19,6 +19,10 @@ const CartPage = () => {
     alert("Data berhasil di hapus");
   };
 
+  const handleToCheckout = () => {
+    alert("Item Checkout");
+  };
+
   console.log(cartItems);
 
   return (
@@ -49,7 +53,7 @@ const CartPage = () => {
             </tr>
           </thead>
           <tbody>
-            {cartItems.map((product, index) => {
+            {cartItems.map((product, index, total) => {
               return (
                 // <div key={index}>
                 <tr key={product?.id}>
@@ -57,7 +61,6 @@ const CartPage = () => {
                   <td className="pr-4">${product?.price}</td>
                   <td className="pr-4">
                     <p id="increment">{product?.cartQuantity}</p>
-                    
                     {/* <input
                       type="number"
                       // id="number"
@@ -95,10 +98,16 @@ const CartPage = () => {
               <th>Total</th>
               <td></td>
               <td></td>
-              <td>0</td>
+              <td></td>
             </tr>
           </tbody>
         </table>
+        <button
+          className="p-2 bg-green-700 text-white rounded-lg"
+          onClick={() => handleToCheckout()}
+        >
+          Checkout
+        </button>
       </div>
       <br />
       <br />
