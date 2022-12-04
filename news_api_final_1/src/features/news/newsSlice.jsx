@@ -4,8 +4,10 @@ import axios from "axios";
 const indonesia = "country=id";
 const covid = "q=covid";
 const programming = "q=programming";
-const apiKey = "apiKey=ee4fef8fedf5406b86a9397530e6169d";
+const apiKey = "apiKey=9ddab756845e4422a9d321f36b9b351a";
 const pageSize = "pageSize=12";
+const popularity = "from=2022-09-30&sortBy=popularity";
+const rootLink = "https://newsapi.org/v2/top-headlines?";
 
 const initialState = {
   entities: [],
@@ -16,7 +18,7 @@ export const IndonesiaNews = createAsyncThunk(
   "articles/fetchNews",
   async () => {
     const response = await axios.get(
-      `https://newsapi.org/v2/top-headlines?${indonesia}&from=2022-09-30&sortBy=popularity&${apiKey}&${pageSize}`
+      `https://newsapi.org/v2/top-headlines?${indonesia}&${apiKey}&${pageSize}`
     );
     return response.data;
   }
@@ -26,7 +28,7 @@ export const ProgrammingNews = createAsyncThunk(
   "articles/fetchNews",
   async () => {
     const response = await axios.get(
-      `https://newsapi.org/v2/everything?${programming}&from=2022-09-30&sortBy=popularity&${apiKey}&${pageSize}`
+      `https://newsapi.org/v2/everything?${programming}&${apiKey}&${pageSize}`
     );
     return response.data;
   }
@@ -34,7 +36,7 @@ export const ProgrammingNews = createAsyncThunk(
 
 export const CovidNews = createAsyncThunk("articles/fetchNews", async () => {
   const response = await axios.get(
-    `https://newsapi.org/v2/everything?${covid}&from=2022-09-30&sortBy=popularity&${apiKey}&${pageSize}`
+    `https://newsapi.org/v2/everything?${covid}&${apiKey}&${pageSize}`
   );
   return response.data;
 });

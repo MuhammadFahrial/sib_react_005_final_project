@@ -13,7 +13,8 @@ const NewsListTech = () => {
     dispatch(ProgrammingNews());
   }, [dispatch]);
 
-  // console.log(allNews);
+  console.log(allNews);
+
   const handleToSaved = (item) => {
     dispatch(addItems(item));
   };
