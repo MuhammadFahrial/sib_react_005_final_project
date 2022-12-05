@@ -35,14 +35,24 @@ const Whistlist = () => {
             >
               <Image
                 source={{ uri: hotel?.image_url }}
-                style={{ width: 150, height: 150 }}
+                style={{
+                  width: 100,
+                  height: 100,
+                  borderRadius: 100,
+                  // borderTopLeftRadius: 100,
+                  // borderTopRightRadius: 100,
+                  // borderBottomLeftRadius: 100,
+                  // borderBottomRightRadius: 100,
+                }}
               />
 
               <View style={{ paddingHorizontal: 10 }}>
-                <Text>{hotel?.name}</Text>
+                <Text style={{ width: 250 }}>{hotel?.name}</Text>
                 <Text style={{ fontSize: 12, color: "gray" }}>
                   {hotel?.label}
                 </Text>
+              </View>
+              <View>
                 <Pressable
                   onPress={() =>
                     savedItems?.find((item) => item.name === hotel.name)
@@ -73,9 +83,16 @@ const Whistlist = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // paddingVertical: 40,
+    marginVertical: 20,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    marginHorizontal: 20,
+    elevation: 5,
+    borderRadius: 30,
+    flexDirection: "row",
     backgroundColor: "#fff",
-    padding: 15,
+    padding: 20,
   },
 });
 

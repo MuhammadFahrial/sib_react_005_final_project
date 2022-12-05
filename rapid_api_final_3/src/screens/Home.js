@@ -119,7 +119,7 @@ export default HomeScreen = () => {
                       <Text style={{ fontWeight: "bold", width: 217 }}>
                         {hotel?.name}
                       </Text>
-                      <Text style={{ fontSize: 12, color: "gray", width: 200 }}>
+                      <Text style={{ fontSize: 12, color: "gray", width: 215 }}>
                         {hotel?.label}
                       </Text>
                     </View>
