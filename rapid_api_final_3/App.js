@@ -20,11 +20,11 @@ export default function App() {
     <NavigationContainer>
       <Provider store={store}>
         <Stack.Navigator>
-          {/* <Stack.Screen
+          <Stack.Screen
           name="Splash"
           component={SplashScreen}
         
-        /> */}
+        />
 
           {/* <Stack.Screen
             name="Search"
