@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Movies } from "../../../features/omdbapi/omdbapiSlice";
+import { movieSearch } from "../../../features/omdbapi/searchSilce";
 
 export default function Navbar({ fixed }) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
@@ -14,12 +14,13 @@ export default function Navbar({ fixed }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(Movies(query));
+    dispatch(movieSearch(query));
 
     if (query <= 0) {
       navigate("/");
     } else {
-      navigate(`/search/?t=${query}`, { replace: true });
+      navigate(`/search/?s=${query}`, { replace: true });
+      console.log(query);
     }
   };
 

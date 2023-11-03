@@ -21,7 +21,7 @@ const Movie = () => {
           <h1 className="text-4xl my-10 text-center font-serif">Home Page</h1>
         </div>
         <div className="grid gap-8 lg:grid-cols-4 sm:grid-cols-2 w-68 m-3">
-          {allMovies.map((movie) => {
+          {allMovies?.map((movie) => {
             return (
               <div key={movie?.imdbID}>
                 <Card
