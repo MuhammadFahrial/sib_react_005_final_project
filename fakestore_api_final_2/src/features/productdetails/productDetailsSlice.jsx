@@ -3,6 +3,8 @@ import axios from "axios";
 
 const initialState = {
   detail: [],
+  loading: false,
+  error: null,
 };
 
 export const productDetail = createAsyncThunk(
@@ -20,9 +22,17 @@ const detailSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(productDetail.fulfilled, (state, action) => {
-      state.detail = action.payload;
-    });
+    builder
+      .addCase(productDetail.fulfilled, (state, action) => {
+        state.detail = action.payload;
+      })
+     .addCase(productDetail.pending, (state) => {
+        state.loading = true;
+      })
+     .addCase(productDetail.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
   },
 });
 

@@ -5,6 +5,8 @@ const PRODUCTS_URL = "https://fakestoreapi.com/products";
 
 const initialState = {
   entities: [],
+  loading: false,
+  error: null,
 };
 
 export const Products = createAsyncThunk("products/fetchProducts", async () => {
@@ -18,10 +20,17 @@ const productSlice = createSlice({
   reducers: {},
 
   extraReducers(builder) {
-    builder.addCase(Products.fulfilled, (state, action) => {
-      // state.entities.push(...action.payload);
-      state.entities = action.payload;
-    });
+    builder
+      .addCase(Products.fulfilled, (state, action) => {
+        state.entities = action.payload;
+      })
+      .addCase(Products.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(Products.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
   },
 });
 

@@ -14,8 +14,6 @@ const HomePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products.entities);
-  // let location = useLocation();
-  // const cartItems = useSelector((state) => state.cart.cartItems);
 
   useEffect(() => {
     dispatch(Products());

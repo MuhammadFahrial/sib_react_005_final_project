@@ -55,19 +55,11 @@ const CartPage = () => {
           <tbody>
             {cartItems.map((product, index, total) => {
               return (
-                // <div key={index}>
                 <tr key={product?.id}>
                   <td className="pr-4">{product?.title}</td>
                   <td className="pr-4">${product?.price}</td>
                   <td className="pr-4">
                     <p id="increment">{product?.cartQuantity}</p>
-                    {/* <input
-                      type="number"
-                      // id="number"
-                      // name="number"
-                      // onChange={product?.cartQuantity += 1}
-                      value={product?.cartQuantity}
-                    /> */}
                   </td>
                   <td className="pr-4">
                     ${product?.price * product?.cartQuantity}
@@ -91,8 +83,6 @@ const CartPage = () => {
                     </button>
                   </td>
                 </tr>
-
-                // </div>
               );
             })}
             <tr>
