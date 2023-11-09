@@ -6,8 +6,6 @@ const covid = "q=covid";
 const programming = "q=programming";
 const apiKey = "apiKey=9ddab756845e4422a9d321f36b9b351a";
 const pageSize = "pageSize=12";
-const popularity = "from=2022-09-30&sortBy=popularity";
-const rootLink = "https://newsapi.org/v2/top-headlines?";
 
 const initialState = {
   entities: [],
@@ -20,7 +18,7 @@ export const IndonesiaNews = createAsyncThunk(
     const response = await axios.get(
       `https://newsapi.org/v2/top-headlines?${indonesia}&${apiKey}&${pageSize}`
     );
-    return response.data;
+    return response.data.articles;
   }
 );
 
@@ -30,7 +28,7 @@ export const ProgrammingNews = createAsyncThunk(
     const response = await axios.get(
       `https://newsapi.org/v2/everything?${programming}&${apiKey}&${pageSize}`
     );
-    return response.data;
+    return response.data.articles;
   }
 );
 
@@ -38,7 +36,7 @@ export const CovidNews = createAsyncThunk("articles/fetchNews", async () => {
   const response = await axios.get(
     `https://newsapi.org/v2/everything?${covid}&${apiKey}&${pageSize}`
   );
-  return response.data;
+  return response.data.articles;
 });
 
 export const searchNews = createAsyncThunk(
@@ -47,7 +45,7 @@ export const searchNews = createAsyncThunk(
     const response = await axios.get(
       `https://newsapi.org/v2/everything?q=${search}&${apiKey}&${pageSize}`
     );
-    return response.data;
+    return response.data.articles;
   }
 );
 
@@ -57,7 +55,6 @@ const newsSlice = createSlice({
   reducers: {
     addItems: (state, action) => {
       state.savedItems.unshift(action.payload);
-
       localStorage.setItem("saved", JSON.stringify(state.savedItems));
     },
 
@@ -73,10 +70,10 @@ const newsSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(IndonesiaNews.fulfilled, (state, action) => {
-        state.entities = action.payload.articles;
+        state.entities = action.payload;
       })
       .addCase(searchNews.fulfilled, (state, action) => {
-        state.entities = action.payload.articles;
+        state.entities = action.payload;
       });
   },
 });
