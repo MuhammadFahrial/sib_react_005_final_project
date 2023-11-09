@@ -5,7 +5,7 @@ import {
   // increment,
   // decrement,
   // incrementByAmount,
-} from "../../features/fakestore/fakeStoreSlice";
+} from "../../features/cart/cartSlice";
 
 const CartPage = () => {
   const dispatch = useDispatch();
@@ -91,12 +91,13 @@ const CartPage = () => {
                     </button>
                   </td>
                 </tr>
+
                 // </div>
               );
             })}
             <tr>
               <th>Total</th>
-              <td></td>
+              <td>harga</td>
               <td></td>
               <td></td>
             </tr>

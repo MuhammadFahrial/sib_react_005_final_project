@@ -20,7 +20,8 @@ const CardDetail = (props) => {
             <p className="text-gray-600 text-xs">{props.category}</p>
             <h3>${props.price}</h3>
             <div className="flex flex-row gap=2 mt-4">
-              <ButtonAddCart onclick={props.addClick} />
+              {/* <ButtonAddCart onclick={props.addClick} /> */}
+              <ButtonAddCart onClick={props.addClick} />
               {/* <BUttonBacktoHome onclick={props.backhomeClick} /> */}
             </div>
           </div>

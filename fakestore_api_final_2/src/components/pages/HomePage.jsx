@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import { Products } from "../../features/fakestore/fakeStoreSlice";
 import Card from "../molekuls/Card";
-import { addItems } from "../../features/fakestore/fakeStoreSlice";
+import { addItems } from "../../features/cart/cartSlice";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -19,10 +19,10 @@ const HomePage = () => {
 
   useEffect(() => {
     dispatch(Products());
-  }, [dispatch]);
+  }, []);
 
   // console.log(allProducts);
-  const handleToAdd = (item, product) => {
+  const handleToAddd = (item, product) => {
     if (!localStorage.getItem("user")) {
       navigate(`/login`, { replace: location });
     } else {
@@ -40,7 +40,7 @@ const HomePage = () => {
         </div>
         <hr />
         <div className="grid gap-8 lg:grid-cols-4 sm:grid-cols-2 w-68 m-3">
-          {allProducts.map((product) => {
+          {allProducts?.map((product) => {
             return (
               <div key={product?.id}>
                 <Card
@@ -52,7 +52,7 @@ const HomePage = () => {
                   detailClick={() =>
                     navigate(`/product/${product?.id}`, { replace: true })
                   }
-                  addClick={() => handleToAdd(product)}
+                  addClick={() => handleToAddd(product)}
                 />
               </div>
             );

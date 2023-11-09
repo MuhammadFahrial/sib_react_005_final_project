@@ -7,15 +7,15 @@ import {
   useNavigate,
   useParams,
 } from "react-router-dom";
-import { productDetail } from "../../features/fakestore/fakeStoreSlice";
+import { productDetail } from "../../features/productdetails/productDetailsSlice";
 import CardDetail from "../molekuls/CardDetail";
-import { addItems } from "../../features/fakestore/fakeStoreSlice";
+import { addItems } from "../../features/cart/cartSlice";
 
 const DetailProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { productId } = useParams();
-  const product = useSelector((state) => state.productDetail.entities);
+  const product = useSelector((state) => state.productDetail.detail);
 
   useEffect(() => {
     dispatch(productDetail(productId));
@@ -25,12 +25,12 @@ const DetailProduct = () => {
     if (!localStorage.getItem("user")) {
       navigate(`/login`, { replace: location });
     } else {
-      dispatch(addItems(product));
-      // dispatch(addToCart(product));
+      dispatch(addItems(item));
+      alert("berhasil di tambahkan");
     }
   };
 
-  console.log(product);
+  // console.log(product);
 
   return (
     <>
@@ -38,13 +38,8 @@ const DetailProduct = () => {
         <h1>Detail Product</h1>
       </div>
       <br />
-      {/* <h1>{product?.title}</h1>
-      <img src={product?.image} alt="" />
-      <p>{product?.title}</p>
-      <p>{product?.category}</p>
-      <p>{product?.description}</p> */}
       <CardDetail
-        // key={indey}
+        key={product?.id}
         img={product?.image}
         title={product?.title}
         category={product?.category}
@@ -52,6 +47,7 @@ const DetailProduct = () => {
         price={product?.price}
         addClick={() => handleToAdd(product)}
       />
+
       <br />
       <br />
     </>
