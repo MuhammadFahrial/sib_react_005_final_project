@@ -25,7 +25,7 @@ const HomePage = () => {
       navigate(`/login`, { replace: location });
     } else {
       dispatch(addItems(item));
-      alert("Berhasil Disimpan");
+      // alert("Berhasil Disimpan");
       // dispatch(addToCart(product));
     }
   };

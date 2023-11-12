@@ -26,7 +26,7 @@ const DetailProduct = () => {
       navigate(`/login`, { replace: location });
     } else {
       dispatch(addItems(item));
-      alert("berhasil di tambahkan");
+      // alert("berhasil di tambahkan");
     }
   };
 

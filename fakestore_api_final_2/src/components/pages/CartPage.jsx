@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeItems,
-  // increment,
-  // decrement,
+  increment,
+  decrement,
+
   // incrementByAmount,
 } from "../../features/cart/cartSlice";
 
@@ -23,7 +24,7 @@ const CartPage = () => {
     alert("Item Checkout");
   };
 
-  console.log(cartItems);
+  // console.log(cartItems);
 
   return (
     <>
@@ -33,38 +34,34 @@ const CartPage = () => {
       <hr />
       <div className="p-6">
         <table className="w-full">
-          <thead className="border-b-2 border-gray-200">
-            <tr className="text-left bg-gray-400">
-              <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                Name
-              </th>
-              <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                Price
-              </th>
-              <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                Quantity
-              </th>
-              <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                Total
-              </th>
-              <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody>
+          <thead className="border-b-2 border-gray-200"></thead>
+          <tbody className="text-[14px]">
             {cartItems.map((product, index, total) => {
               return (
                 <tr key={product?.id}>
-                  <td className="pr-4">{product?.title}</td>
-                  <td className="pr-4">${product?.price}</td>
-                  <td className="pr-4">
-                    <p id="increment">{product?.cartQuantity}</p>
+                  <td className="w-1/2">{product?.title}</td>
+                  <td className="w-26 text-center">
+                    ${new Intl.NumberFormat().format(product?.price)}
                   </td>
-                  <td className="pr-4">
-                    ${product?.price * product?.cartQuantity}
+                  <td className="w-26 flex justify-center gap-2">
+                    <button onClick={() => dispatch(decrement(product))}>
+                      -
+                    </button>
+                    <p id="">{product?.cartQuantity}</p>
+                    <button onClick={() => dispatch(increment(product))}>
+                      +
+                    </button>
                   </td>
-                  <td>
+                  <td className="w-28 text-center">
+                    $
+                    {
+                      (total = new Intl.NumberFormat().format(
+                        product?.price * product?.cartQuantity
+                      ))
+                    }
+                  </td>
+
+                  <td className="w-8 text-center">
                     <button onClick={() => handleToRemove(product)}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -85,29 +82,15 @@ const CartPage = () => {
                 </tr>
               );
             })}
-            <tr>
-              <th>Total</th>
-              <td>harga</td>
-              <td></td>
-              <td></td>
-            </tr>
           </tbody>
         </table>
         <button
-          className="p-2 bg-green-700 text-white rounded-lg"
+          className="mt-2 px-2 py-1 bg-green-700 text-white text-[14px] rounded"
           onClick={() => handleToCheckout()}
         >
           Checkout
         </button>
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
     </>
   );
 };
