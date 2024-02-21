@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// const Movie_URL = "https://www.omdbapi.com/?s=marvel&apikey=68e1bba8";
-
 const initialState = {
   search: [],
   loading: false,
@@ -13,7 +11,7 @@ export const movieSearch = createAsyncThunk(
   "seacrh/moviesSearch",
   async (search) => {
     const res = await axios.get(
-      `https://www.omdbapi.com/?s=${search}&apikey=68e1bba8`
+      `https://www.omdbapi.com/?s=${search}&apikey=`
     );
     return res?.data?.Search;
   }
