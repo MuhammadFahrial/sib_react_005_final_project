@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const Movie_URL = "https://www.omdbapi.com/?s=marvel&apikey=68e1bba8";
+const Movie_URL = "https://www.omdbapi.com/?s=marvel&apikey=";
 
 const initialState = {
   entities: [],

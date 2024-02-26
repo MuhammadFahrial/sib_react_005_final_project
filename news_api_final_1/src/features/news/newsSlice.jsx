@@ -4,7 +4,7 @@ import axios from "axios";
 const indonesia = "country=id";
 const covid = "q=covid";
 const programming = "q=programming";
-const apiKey = "apiKey=9ddab756845e4422a9d321f36b9b351a";
+const apiKey = "apiKey=";
 const pageSize = "pageSize=12";
 
 const initialState = {
