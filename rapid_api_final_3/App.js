@@ -12,7 +12,6 @@ import History from "./src/screens/History";
 import Whistlist from "./src/screens/Whistlist";
 import Search from "./src/screens/Search";
 import SplashScreen from "./src/screens/SplashScreen";
-import Header from "./src/components/Header";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,13 +19,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Screen
-            name="Splash"
-            component={SplashScreen}
-            options={{ headerShown: false }}
-          />
+        name="Splash"
+        component={SplashScreen}
+        options={{ headerShown: false }}
+      />
       <Provider store={store}>
         <Stack.Navigator>
-          
           <Stack.Screen
             name="Home"
             component={Home}
@@ -40,17 +38,7 @@ export default function App() {
           <Stack.Screen name="Search" component={Search} />
         </Stack.Navigator>
       </Provider>
-      {/* <BottomNav /> */}
       <Nav />
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

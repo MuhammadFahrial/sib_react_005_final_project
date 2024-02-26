@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Text, Button, StyleSheet, View, Pressable, Image } from "react-native";
+import {StyleSheet, View, Pressable, Image } from "react-native";
 import Home from "../../assets/home.png";
 import Whislist from "../../assets/wishlist.png";
 import History from "../../assets/history.png";
@@ -36,7 +36,6 @@ const Nav = () => {
         <View style={styles.NavBar}>
           <Pressable onPress={() => handleHome()}>
             <Image source={Home} style={styles.ImageContainer} />
-            {/* <Text style={styles.ViewText}>Home</Text> */}
           </Pressable>
 
           <Pressable onPress={() => handleWhislist()}>

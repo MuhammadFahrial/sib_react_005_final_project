@@ -7,7 +7,7 @@ import {
   Pressable,
   StyleSheet,
 } from "react-native";
-import { addItems, removeItems } from "../features/rapidapi/rapidApiSlice";
+import { removeItems } from "../features/rapidapi/rapidApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Whistlist = () => {

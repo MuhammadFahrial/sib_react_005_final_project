@@ -1,10 +1,15 @@
 import React from "react";
-import { View, TextInput, Button, StyleSheet, Text, TouchableOpacity, Alert } from "react-native";
+import {
+  View,
+  TextInput,
+  Button,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import CheckBox from "expo-checkbox";
 import { useState } from "react";
-// import { useFonts, MontSerrat_300Light, MontSerrat_400Regular, MontSerrat_500Medium, MontSerrat_700Bold, MontSerrat_900Black,} from "@expo-google-fonts/montserrat";
-// import { JosefinSans_300Light, JosefinSans_400Regular, JosefinSans_500Medium,} from "@expo-google-fonts/josefin-sans"
-import AppLoading from "expo-app-loading"
 
 const Profile = () => {
   const [email, setEmail] = useState("");
@@ -12,39 +17,33 @@ const Profile = () => {
   const [agree, setAgree] = useState(false);
 
   const submit = () => {
-    if (email === "user@hotel.com" && password === "user123"){
-      Alert.alert('Anda telah login');
-    }else{
-      Alert.alert('Email dan password anda salah')
+    if (email === "user@hotel.com" && password === "user123") {
+      Alert.alert("Anda telah login");
+    } else {
+      Alert.alert("Email dan password anda salah");
     }
   };
 
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.mainHeader}>
-        Login Form
-      </Text>
-      <Text style={styles.description}>
-        Silahkan Login
-      </Text>
+      <Text style={styles.mainHeader}>Login Form</Text>
+      <Text style={styles.description}>Silahkan Login</Text>
 
       <View style={styles.inputContainer}>
-        <Text style={styles.labels}>
-          Enter your email
-        </Text>
-        <TextInput style={styles.inputStyle}
-          autoCapitalize='none'
+        <Text style={styles.labels}>Enter your email</Text>
+        <TextInput
+          style={styles.inputStyle}
+          autoCapitalize="none"
           autoCorrect={false}
           value={email}
           onChangeText={(actualData) => setEmail(actualData)}
         />
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.labels}>
-          Enter your password
-        </Text>
-        <TextInput style={styles.inputStyle}
-          autoCapitalize='none'
+        <Text style={styles.labels}>Enter your password</Text>
+        <TextInput
+          style={styles.inputStyle}
+          autoCapitalize="none"
           autoCorrect={false}
           secureTextEntry={true}
           value={password}
@@ -71,7 +70,7 @@ const Profile = () => {
         ]}
         disabled={!agree}
         onPress={() => submit()}
-        >
+      >
         <Text style={styles.buttonText}>LOGIN</Text>
       </TouchableOpacity>
     </View>
@@ -125,8 +124,8 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
   },
   wrapper: {
-    marginTop: 10
-  }
-})
+    marginTop: 10,
+  },
+});
 
 export default Profile;
