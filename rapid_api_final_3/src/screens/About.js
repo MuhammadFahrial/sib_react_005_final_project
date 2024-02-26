@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Dimensions,
   FlatList,
@@ -6,61 +6,22 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
   Image,
   Animated,
-} from 'react-native';
+} from "react-native";
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import COLORS from '../features/colors/colors';
-import AboutUs from '../features/AboutSlice/AboutUs';
-const {width} = Dimensions.get('screen');
+import COLORS from "../features/colors/colors";
+import AboutUs from "../features/AboutSlice/AboutUs";
+const { width } = Dimensions.get("screen");
 const cardWidth = width / 1.8;
 
-const AboutScreen = ({navigation}) => {
-  const categories = ['All', 'Popular', 'Top Rated', 'Featured', 'Luxury'];
-  const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
+const AboutScreen = ({ navigation }) => {
   const [activeCardIndex, setActiveCardIndex] = React.useState(0);
   const scrollX = React.useRef(new Animated.Value(0)).current;
 
-  const CategoryList = ({navigation}) => {
-    return (
-      <View style={style.categoryListContainer}>
-        {categories.map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            activeOpacity={0.8}
-            onPress={() => setSelectedCategoryIndex(index)}>
-            <View>
-              <Text
-                style={{
-                  ...style.categoryListText,
-                  color:
-                    selectedCategoryIndex == index
-                      ? COLORS.primary
-                      : COLORS.grey,
-                }}>
-                {item}
-              </Text>
-              {selectedCategoryIndex == index && (
-                <View
-                  style={{
-                    height: 3,
-                    width: 30,
-                    backgroundColor: COLORS.primary,
-                    marginTop: 2,
-                  }}
-                />
-              )}
-            </View>
-          </TouchableOpacity>
-        ))}
-      </View>
-    );
-  };
-  const Card = ({hotel, index}) => {
+  const Card = ({ hotel, index }) => {
     const inputRange = [
       (index - 1) * cardWidth,
       index * cardWidth,
@@ -78,59 +39,59 @@ const AboutScreen = ({navigation}) => {
       <TouchableOpacity
         disabled={activeCardIndex != index}
         activeOpacity={1}
-        onPress={() => navigation.navigate('DetailsAbout', hotel)}>
-        <Animated.View style={{...style.card, transform: [{scale}]}}>
-          <Animated.View style={{...style.cardOverLay, opacity}} />
+        onPress={() => navigation.navigate("DetailsAbout", hotel)}
+      >
+        <Animated.View style={{ ...style.card, transform: [{ scale }] }}>
+          <Animated.View style={{ ...style.cardOverLay, opacity }} />
           <Image source={hotel.image} style={style.cardImage} />
           <View style={style.cardDetails}>
             <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
               <View>
-                <Text style={{fontWeight: 'bold', fontSize: 17}}>
+                <Text style={{ fontWeight: "bold", fontSize: 17 }}>
                   {hotel.name}
                 </Text>
-                <Text style={{color: COLORS.grey, fontSize: 12}}>
+                <Text style={{ color: COLORS.grey, fontSize: 12 }}>
                   {hotel.location}
                 </Text>
               </View>
             </View>
             <View
               style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
+                flexDirection: "row",
+                justifyContent: "space-between",
                 marginTop: 10,
-              }}>
-            </View>
+              }}
+            ></View>
           </View>
         </Animated.View>
       </TouchableOpacity>
     );
   };
-  
+
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <View style={style.header}>
-        <View style={{paddingBottom: 15}}>
-          <Text style={{fontSize: 30, fontWeight: 'bold'}}>
+        <View style={{ paddingBottom: 15 }}>
+          <Text style={{ fontSize: 30, fontWeight: "bold" }}>
             About Kelompok 3
           </Text>
-          <View style={{flexDirection: 'row'}}>
-          </View>
+          <View style={{ flexDirection: "row" }}></View>
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        
         {/* <CategoryList /> */}
         <View>
           <Animated.FlatList
             onMomentumScrollEnd={(e) => {
               setActiveCardIndex(
-                Math.round(e.nativeEvent.contentOffset.x / cardWidth),
+                Math.round(e.nativeEvent.contentOffset.x / cardWidth)
               );
             }}
             onScroll={Animated.event(
-              [{nativeEvent: {contentOffset: {x: scrollX}}}],
-              {useNativeDriver: true},
+              [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+              { useNativeDriver: true }
             )}
             horizontal
             data={AboutUs}
@@ -140,17 +101,19 @@ const AboutScreen = ({navigation}) => {
               paddingRight: cardWidth / 2 - 40,
             }}
             showsHorizontalScrollIndicator={false}
-            renderItem={({item, index}) => <Card hotel={item} index={index} />}
+            renderItem={({ item, index }) => (
+              <Card hotel={item} index={index} />
+            )}
             snapToInterval={cardWidth}
           />
         </View>
         <View
           style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
+            flexDirection: "row",
+            justifyContent: "space-between",
             marginHorizontal: 20,
-          }}>
-        </View>
+          }}
+        ></View>
         <FlatList
           data={AboutUs}
           horizontal
@@ -169,29 +132,19 @@ const AboutScreen = ({navigation}) => {
 const style = StyleSheet.create({
   header: {
     marginTop: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     paddingHorizontal: 20,
   },
-  searchInputContainer: {
-    height: 50,
-    backgroundColor: COLORS.light,
-    marginTop: 15,
-    marginLeft: 20,
-    borderTopLeftRadius: 30,
-    borderBottomLeftRadius: 30,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   categoryListContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginHorizontal: 20,
     marginTop: 30,
   },
   categoryListText: {
     fontSize: 17,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   card: {
     height: 280,
@@ -203,7 +156,7 @@ const style = StyleSheet.create({
   },
   cardImage: {
     height: 200,
-    width: '100%',
+    width: "100%",
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
   },
@@ -211,34 +164,34 @@ const style = StyleSheet.create({
     height: 60,
     width: 80,
     backgroundColor: COLORS.primary,
-    position: 'absolute',
+    position: "absolute",
     zIndex: 1,
     right: 0,
     borderTopRightRadius: 15,
     borderBottomLeftRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   cardDetails: {
     height: 100,
     borderRadius: 15,
     backgroundColor: COLORS.white,
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     padding: 20,
-    width: '100%',
+    width: "100%",
   },
   cardOverLay: {
     height: 280,
     backgroundColor: COLORS.white,
-    position: 'absolute',
+    position: "absolute",
     zIndex: 100,
     width: cardWidth,
     borderRadius: 15,
   },
   topHotelCardImage: {
     height: 80,
-    width: '100%',
+    width: "100%",
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
   },

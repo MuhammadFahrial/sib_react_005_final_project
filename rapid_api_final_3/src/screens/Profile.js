@@ -8,35 +8,16 @@ import AppLoading from "expo-app-loading"
 
 const Profile = () => {
   const [email, setEmail] = useState("");
-  // console.log(email)
   const [password, setPassword] = useState("");
-  // console.log(password)
   const [agree, setAgree] = useState(false);
-  console.log(email, password)
 
   const submit = () => {
-    // return Alert.alert(email, password);
     if (email === "user@hotel.com" && password === "user123"){
       Alert.alert('Anda telah login');
     }else{
       Alert.alert('Email dan password anda salah')
     }
   };
-
-  // let [fontLoaded, error] = useFonts
-  // ({
-  //   MontSerrat_400Regular, 
-  //   MontSerrat_500Medium, 
-  //   MontSerrat_700Bold, 
-  //   JosefinSans_400Regular, 
-  //   JosefinSans_500Medium,
-  // });
-
-  // if(!fontLoaded) {
-  //   return
-  //   <AppLoading />;
-
-  // }
 
   return (
     <View style={styles.mainContainer}>

@@ -7,16 +7,15 @@ const baseUrl = "https://apidojo-booking-v1.p.rapidapi.com";
 const options = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "39c6162b6cmsh95679bf6bc16fc9p19c912jsne032326789bc",
+    "X-RapidAPI-Key": "d98230dc92msh3741783c327b172p16f25bjsnf98b3f16584e",
     "X-RapidAPI-Host": "apidojo-booking-v1.p.rapidapi.com",
   },
 };
 
 const initialState = {
+  search: [],
   data: [],
-  searchResult: [],
   savedItems: [],
-  // savedItems: JSON.parse(AsyncStorage.getItem("saved")) || [],
   loading: false,
   error: null,
 };
@@ -33,29 +32,20 @@ export const Hotels = createAsyncThunk("hotels/fetchHotels", async () => {
   }
 });
 
-// export const getDataApiForSearchbar = createAsyncThunk(
-//   "api/getDataApiForSearchbar",
-//   async (
-//     arrivalDate,
-//     departureDate,
-//     roomQty,
-//     guestQty,
-//     childrenQty,
-//     destId
-//   ) => {
-//     try {
-//       const response = await fetch(
-//         `${baseUrl}/properties/list?offset=0&arrival_date=${arrivalDate}&departure_date=${departureDate}&room_qty=${roomQty}&guest_qty=${guestQty}&children_qty=${childrenQty}&dest_ids=${destId}&search_type=city&price_filter_currencycode=IDR&languagecode=id&order_by=popularity&travel_purpose=leisure`,
-//         options
-//       );
-//       const data = await response.json();
-//       console.log("json : ", data);
-//       return FormDataEvent;
-//     } catch (error) {
-//       throw new Error(error);
-//     }
-//   }
-// );
+export const searchHotels = createAsyncThunk(
+  "search/fetchHotels",
+  async (search) => {
+    try {
+      const res = await axios.get(
+        `${baseUrl}/locations/auto-complete?text=${search}&languagecode=en-us`,
+        options
+      );
+      return res.data;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+);
 
 export const rapidApiSlice = createSlice({
   name: "hotels",
@@ -85,18 +75,18 @@ export const rapidApiSlice = createSlice({
       .addCase(Hotels.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      .addCase(searchHotels.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(searchHotels.fulfilled, (state, action) => {
+        state.loading = false;
+        state.search = action.payload;
+      })
+      .addCase(searchHotels.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       });
-    // .addCase(getDataApiForSearchbar.pending, (state) => {
-    //   state.loading = true;
-    // })
-    // .addCase(getDataApiForSearchbar.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.searchResult = action.payload;
-    // })
-    // .addCase(getDataApiForSearchbar.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.error.message;
-    // });
   },
 });
 

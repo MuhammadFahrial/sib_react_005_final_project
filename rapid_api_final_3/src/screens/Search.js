@@ -1,34 +1,109 @@
-import React from "react";
-import { View, Text, ScrollView } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Image,
+  ScrollView,
+  Pressable,
+} from "react-native";
+import { addItems, removeItems } from "../features/rapidapi/rapidApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Search } from "../features/rapidapi/rapidApiSlice";
 
 const SearchScreen = () => {
   const dispatch = useDispatch();
+  const searchHotels = useSelector((state) => state.hotels.search);
+  const savedItems = useSelector((state) => state.saved.savedItems);
 
-  const SearchHotels = useSelector((state) => state.search.data);
+  const handleToSaved = (item) => {
+    dispatch(addItems(item));
+  };
 
-  const getSearchParams = () => {
-    const search = window.location.search;
-    const params = new URLSearchParams(search);
-
-    const searchParams = params.get("text");
-    return searchParams;
+  const handleToRemove = (item) => {
+    dispatch(removeItems(item));
   };
 
   return (
     <View>
-      <Text>Search</Text>
-      <ScrollView horizontal>
-        {SearchHotels.map((hotel, index) => {
+      <ScrollView vertical>
+        {searchHotels.map((hotel, index) => {
           return (
-            <View key={index} style={{ width: 200, paddingHorizontal: 5 }}>
-              <Image
-                source={{ uri: hotel?.image_url }}
-                style={{ width: 150, height: 150 }}
-              />
-              <Text>{hotel?.name}</Text>
-              {/* <Text>{hotel?.label}</Text> */}
+            <View
+              key={index}
+              style={{
+                marginRight: 6,
+                marginLeft: 12,
+                display: "flex",
+                flexDirection: "row",
+                marginVertical: 20,
+                gap: 20,
+              }}
+            >
+              {hotel.image_url === undefined ? (
+                <Text
+                  style={{
+                    backgroundColor: "black",
+                    color: "white",
+                    width: 150,
+                    height: 150,
+                    display: "flex",
+                    flexDirection: "column",
+                    textAlign: "center",
+                    paddingVertical: 60,
+                    borderTopLeftRadius: 20,
+                    borderBottomRightRadius: 20,
+                  }}
+                >
+                  Image not found
+                </Text>
+              ) : (
+                <Image
+                  source={{ uri: hotel.image_url }}
+                  style={{
+                    width: 150,
+                    height: 150,
+                    borderTopLeftRadius: 20,
+                    borderBottomRightRadius: 20,
+                  }}
+                />
+              )}
+              <View
+                style={{
+                  paddingTop: 10,
+                  flexDirection: "row",
+                }}
+              >
+                <View>
+                  <Text style={{ fontWeight: "bold", width: 217 }}>
+                    {hotel?.name}
+                  </Text>
+                  <Text style={{ fontSize: 12, color: "gray", width: 215 }}>
+                    {hotel?.label}
+                  </Text>
+                </View>
+                <View>
+                  <Pressable
+                    onPress={() =>
+                      savedItems?.find((item) => item.name === hotel.name)
+                        ? handleToRemove(hotel)
+                        : handleToSaved(hotel)
+                    }
+                  >
+                    {savedItems?.find((item) => item.name === hotel.name) ? (
+                      <Image
+                        style={{ width: 35, height: 35 }}
+                        source={require("../../assets/Favorite1.png")}
+                      />
+                    ) : (
+                      <Image
+                        style={{ width: 35, height: 35 }}
+                        source={require("../../assets/Favorite.png")}
+                      />
+                    )}
+                  </Pressable>
+                </View>
+              </View>
             </View>
           );
         })}
@@ -38,3 +113,17 @@ const SearchScreen = () => {
 };
 
 export default SearchScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#fff",
+    alignItems: "center",
+    // paddingHorizontal: 15,
+  },
+
+  titleText: {
+    fontWeight: "bold",
+    fontSize: 18,
+    padding: 10,
+  },
+});

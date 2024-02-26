@@ -11,16 +11,13 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Hotels } from "../features/rapidapi/rapidApiSlice";
-import DateTimePicker, {
-  DateTimePickerAndroid,
-} from "@react-native-community/datetimepicker";
 import { addItems, removeItems } from "../features/rapidapi/rapidApiSlice";
+import Header from "../components/Header";
 
 export default HomeScreen = () => {
   const dispatch = useDispatch();
   const allHotels = useSelector((state) => state.hotels.data);
   const savedItems = useSelector((state) => state.saved.savedItems);
-  const [date, setDate] = useState(new Date(1598051730000));
 
   useEffect(() => {
     dispatch(Hotels());
@@ -34,80 +31,29 @@ export default HomeScreen = () => {
     dispatch(removeItems(item));
   };
 
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate;
-    setDate(currentDate);
-  };
-
-  const showMode = (currentMode) => {
-    DateTimePickerAndroid.open({
-      value: date,
-      onChange,
-      mode: currentMode,
-      is24Hour: true,
-    });
-  };
-
-  const showDatepicker = () => {
-    showMode("date");
-  };
-
-  const showTimepicker = () => {
-    showMode("time");
-  };
-
   const MarginTop = () => <View style={{ marginTop: 15 }} />;
 
   return (
     <View style={styles.container}>
-      {/* <Text>Welcome Page Home</Text> */}
-      <MarginTop />
+      <Header />
       <View>
-        <TextInput
-          style={styles.inputText}
-          placeholder="Where do you want to go?"
-        />
-        <MarginTop />
-        <View style={styles.time}>
-          <Pressable
-            onPress={showDatepicker}
-            style={{
-              backgroundColor: "#c3cfff",
-              paddingVertical: 10,
-              paddingHorizontal: 55,
-            }}
-          >
-            <Text>Check-In-Date</Text>
-          </Pressable>
-
-          <Pressable
-            onPress={showDatepicker}
-            style={{
-              backgroundColor: "#c3cfff",
-              paddingVertical: 10,
-              paddingHorizontal: 55,
-            }}
-          >
-            <Text>Check-Out-Date</Text>
-          </Pressable>
-        </View>
-
-        <View style={styles.viewButton}></View>
         <MarginTop />
         <View>
           <Text style={styles.titleText}>Top Hotel Indonesia</Text>
           <ScrollView horizontal>
             {allHotels.map((hotel, index) => {
+              console.log(allHotels);
               return (
                 <View
                   key={index}
                   style={{
-                    paddingHorizontal: 10,
+                    marginRight: 6,
+                    marginLeft: 12,
                   }}
                 >
                   <Image
                     source={{ uri: hotel?.image_url }}
-                    style={{ width: 250, height: 200, borderRadius: 10 }}
+                    style={{ width: 250, height: 200 }}
                   />
                   <View
                     style={{
@@ -162,7 +108,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    paddingHorizontal: 15,
+    // paddingHorizontal: 15,
   },
 
   inputText: {
@@ -170,6 +116,8 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderWidth: 1,
     paddingLeft: 10,
+    marginRight: 10,
+    flex: 1,
   },
   time: {
     flexDirection: "row",

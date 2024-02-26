@@ -18,71 +18,76 @@ const Whistlist = () => {
     dispatch(removeItems(item));
   };
 
-  return (
-    <View style={styles.container}>
-      {/* <Text>Whishlits</Text> */}
+  const itemWhislist = savedItems.map((hotel, index) => {
+    return (
+      <View
+        key={index}
+        style={{
+          width: 200,
+          paddingVertical: 15,
+          flexDirection: "row",
+        }}
+      >
+        <Image
+          source={{ uri: hotel?.image_url }}
+          style={{
+            width: 100,
+            height: 100,
+            borderTopLeftRadius: 100,
+            borderTopRightRadius: 100,
+            borderBottomLeftRadius: 100,
+            borderBottomRightRadius: 100,
+          }}
+        />
 
-      <ScrollView>
-        {savedItems.map((hotel, index) => {
-          return (
-            <View
-              key={index}
-              style={{
-                width: 200,
-                paddingVertical: 5,
-                flexDirection: "row",
-              }}
-            >
+        <View style={{ paddingHorizontal: 10 }}>
+          <Text>{hotel?.name}</Text>
+          <Text style={{ fontSize: 12, color: "gray" }}>{hotel?.label}</Text>
+          <Pressable
+            onPress={() =>
+              savedItems?.find((item) => item.name === hotel.name)
+                ? handleToRemove(hotel)
+                : handleToSaved(hotel)
+            }
+          >
+            {savedItems?.find((item) => item.name === hotel.name) ? (
               <Image
-                source={{ uri: hotel?.image_url }}
-                style={{ width: 100, height: 100, borderTopLeftRadius: 100, borderTopRightRadius: 100, borderBottomLeftRadius: 100, borderBottomRightRadius: 100}}
+                style={{ width: 35, height: 35 }}
+                source={require("../../assets/Favorite1.png")}
               />
+            ) : (
+              <Image
+                style={{ width: 35, height: 35 }}
+                source={require("../../assets/Favorite.png")}
+              />
+            )}
+          </Pressable>
+        </View>
+      </View>
+    );
+  });
 
-              <View style={{ paddingHorizontal: 10 }}>
-                <Text>{hotel?.name}</Text>
-                <Text style={{ fontSize: 12, color: "gray" }}>
-                  {hotel?.label}
-                </Text>
-                <Pressable
-                  onPress={() =>
-                    savedItems?.find((item) => item.name === hotel.name)
-                      ? handleToRemove(hotel)
-                      : handleToSaved(hotel)
-                  }
-                >
-                  {savedItems?.find((item) => item.name === hotel.name) ? (
-                    <Image
-                      style={{ width: 35, height: 35 }}
-                      source={require("../../assets/Favorite1.png")}
-                    />
-                  ) : (
-                    <Image
-                      style={{ width: 35, height: 35 }}
-                      source={require("../../assets/Favorite.png")}
-                    />
-                  )}
-                </Pressable>
-              </View>
-            </View>
-          );
-        })}
-      </ScrollView>
+  return (
+    <View>
+      <View style={itemWhislist.length <= 0 ? "" : styles.container}>
+        <ScrollView>{itemWhislist}</ScrollView>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 40,
     marginVertical: 30,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    justifyContent: "flex-start",
+    alignItems: "center",
     marginHorizontal: 20,
-    elevation: 5,
     borderRadius: 30,
-    flexDirection: 'row',
-    backgroundColor: "#fff",
+    flexDirection: "row",
     padding: 20,
+    borderRadius: 10,
+    elevation: 5,
+    backgroundColor: "#fff",
   },
 });
 
