@@ -4,7 +4,7 @@ import axios from "axios";
 const indonesia = "country=id";
 const covid = "q=covid";
 const programming = "q=programming";
-const apiKey = "apiKey=";
+const apiKey = "apiKey=9ddab756845e4422a9d321f36b9b351a";
 const pageSize = "pageSize=12";
 
 const initialState = {
@@ -80,3 +80,4 @@ const newsSlice = createSlice({
 
 export const { addItems, removeItems } = newsSlice.actions;
 export default newsSlice.reducer;
+
